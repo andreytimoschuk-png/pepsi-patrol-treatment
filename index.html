@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<title>PEPSI PATROL — «That's Criminal» · Режиссёрский тритмент</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #0C0E10;
+  --panel: #14171A;
+  --elevated: #1A1E22;
+  --line: #262B30;
+  --text: #E9EBEA;
+  --dim: #8D9499;
+  --dim2: #5E6569;
+  --red: #FF1400;
+  --blue: #0025FF;
+  --radius: 2px;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+*,*::before,*::after { box-sizing: inherit; }
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) { --bg:#0C0E10; --panel:#14171A; --elevated:#1A1E22; --line:#262B30; --text:#E9EBEA; --dim:#8D9499; }
+}
+html, body { background: var(--bg); }
+body {
+  margin: 0;
+  font-family: 'Archivo', sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+.mono { font-family: 'IBM Plex Mono', monospace; }
+a { color: inherit; }
+img, video { max-width: 100%; display: block; }
+
+/* REC ticker */
+.rec-bar {
+  position: sticky; top: 0; z-index: 50;
+  padding-top: env(safe-area-inset-top, 0px);
+  background: rgba(12,14,16,0.88);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--line);
+  display: flex; align-items: center; gap: .5em;
+  padding-left: 1.25rem; padding-right: 1.25rem;
+  height: 40px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--dim);
+}
+.rec-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--red); animation: blink 1.6s steps(1) infinite; flex: none; }
+@keyframes blink { 50% { opacity: .25; } }
+.rec-bar .sep { color: var(--dim2); }
+.rec-bar .case { color: var(--text); }
+.rec-bar .spacer { flex: 1; }
+
+.wrap { max-width: 920px; margin: 0 auto; padding: 0 1.25rem; }
+.wrap-wide { max-width: 1180px; margin: 0 auto; padding: 0 1.25rem; }
+
+/* HERO */
+.hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 7rem 1.25rem 3.5rem;
+  overflow: hidden;
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 3px),
+    radial-gradient(ellipse 120% 80% at 50% 0%, #1b2024 0%, #0C0E10 60%);
+}
+.hero-corner {
+  position: absolute; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--dim2);
+  letter-spacing: .06em;
+}
+.hero-corner.tl { top: 1.5rem; left: 1.25rem; }
+.hero-corner.tr { top: 1.5rem; right: 1.25rem; text-align: right; }
+.hero-corner.tr .rec { color: var(--red); }
+.hero-eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; letter-spacing: .1em; color: var(--dim);
+  margin: 0 0 1.1rem;
+}
+.hero h1 {
+  font-size: clamp(2.8rem, 9vw, 6.4rem);
+  line-height: .96;
+  font-weight: 800;
+  margin: 0 0 1.1rem;
+  letter-spacing: -.01em;
+}
+.hero-sub { font-size: clamp(1rem, 2vw, 1.25rem); color: var(--dim); max-width: 34rem; margin: 0 0 2rem; }
+.hero-meta {
+  display: flex; flex-wrap: wrap; gap: 1.6rem 2.2rem;
+  font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--dim);
+  border-top: 1px solid var(--line); padding-top: 1.3rem;
+}
+.hero-meta b { color: var(--text); font-weight: 500; display:block; margin-bottom:.2rem;}
+.hero-meta .mi { color: var(--dim2); letter-spacing:.08em; font-size:10px; }
+
+/* Section scaffolding */
+section { padding: 5rem 0; border-bottom: 1px solid var(--line); }
+section:last-of-type { border-bottom: none; }
+.sec-head { display:flex; align-items:baseline; gap: .9rem; margin-bottom: 2.2rem; }
+.sec-num { font-family:'IBM Plex Mono',monospace; color: var(--red); font-size: 13px; }
+.sec-title { font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 700; margin: 0; letter-spacing: -.01em; }
+.lede { color: var(--dim); max-width: 42rem; font-size: 1.02rem; }
+
+.field-label {
+  font-family:'IBM Plex Mono',monospace; font-size: 11px; color: var(--dim2);
+  letter-spacing: .08em; margin-bottom: .4rem; display:block;
+}
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+@media (max-width: 760px) { .two-col { grid-template-columns: 1fr; gap: 1.8rem; } }
+
+p { margin: 0 0 1rem; max-width: 64ch; }
+.body-text p { color: #CBD0D2; }
+
+/* Logline / genre panel */
+.case-card {
+  background: var(--panel); border: 1px solid var(--line); padding: 1.8rem 2rem;
+}
+
+/* Signature visual */
+.signature { background: var(--panel); padding: 3rem 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.signature .wrap { display:grid; grid-template-columns: 1fr 1.1fr; gap: 3rem; align-items: center; }
+@media (max-width: 760px) { .signature .wrap { grid-template-columns: 1fr; } }
+.signature-quote { font-size: clamp(1.3rem, 2.6vw, 1.9rem); font-weight: 600; line-height: 1.25; margin: 0; }
+.signature-key {
+  font-family:'IBM Plex Mono',monospace; font-size: 12px; color: var(--red);
+  border: 1px solid var(--red); display: inline-block; padding: .35rem .7rem; margin-bottom: 1rem;
+}
+
+/* Acts */
+.acts { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.act { background: var(--bg); padding: 1.8rem 2rem; display:grid; grid-template-columns: 5rem 1fr; gap: 1.4rem; }
+@media (max-width: 600px) { .act { grid-template-columns: 1fr; gap:.5rem; } }
+.act-num { font-family:'IBM Plex Mono',monospace; color: var(--dim2); font-size: 12px; }
+.act-title { font-weight: 700; margin: 0 0 .5rem; letter-spacing: .02em; }
+.act p { color: #CBD0D2; margin: 0; }
+
+/* Why grid */
+.why-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 2.2rem 2.5rem; }
+@media (max-width: 760px) { .why-grid { grid-template-columns: 1fr; } }
+.why-grid p { color: #CBD0D2; max-width: none; }
+
+/* Script */
+.script-block { background: var(--panel); border: 1px solid var(--line); padding: 2rem 2.2rem; }
+.script-block p { color: #CBD0D2; max-width: none; }
+.script-line { font-family:'IBM Plex Mono',monospace; font-size: .92rem; color: var(--text); background: var(--elevated); padding: .9rem 1.1rem; margin: 1rem 0; border-left: 2px solid var(--blue); }
+.script-line .ru { color: var(--dim); display:block; margin-top:.35rem; font-family:'Archivo',sans-serif; }
+.script-tag { display:inline-block; margin-top:1.4rem; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.08em; color:var(--red); border:1px solid var(--red); padding:.3rem .6rem; }
+
+/* Storyboard frames */
+.frame {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2.4rem;
+  padding: 2.6rem 0; border-top: 1px solid var(--line);
+}
+.frame:first-of-type { border-top: none; }
+@media (max-width: 800px) { .frame { grid-template-columns: 1fr; gap: 1.2rem; } }
+.frame-imgs { align-self: start; border: 1px solid var(--line); overflow:hidden; }
+.frame-imgs.two { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); }
+.frame-imgs img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 16/9; }
+.frame-head { display:flex; align-items:baseline; gap: .8rem; margin-bottom: .9rem; }
+.frame-num { font-family:'IBM Plex Mono',monospace; font-weight:600; letter-spacing:.04em; color: var(--text); font-size: .95rem; }
+.frame-sub { font-family:'IBM Plex Mono',monospace; font-size: 11px; color: var(--dim2); }
+.frame-action { color: #CBD0D2; margin-bottom: 1.1rem; }
+.frame-lines { margin-bottom: 1.2rem; }
+.line { font-family:'IBM Plex Mono',monospace; font-size:.88rem; background: var(--panel); border-left: 2px solid var(--red); padding: .7rem .9rem; margin-bottom:.5rem; }
+.line-who { display:block; color: var(--red); font-size: .72rem; letter-spacing: .08em; margin-bottom:.3rem; }
+.line-pl { display:block; color: var(--text); }
+.line-ru { display:block; color: var(--dim); font-family:'Archivo',sans-serif; margin-top:.3rem; }
+.frame-data { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem 1.4rem; border-top: 1px solid var(--line); padding-top: 1.1rem; }
+@media (max-width: 480px) { .frame-data { grid-template-columns: 1fr; } }
+.dfield {}
+.dlabel { display:block; font-family:'IBM Plex Mono',monospace; font-size: 10px; letter-spacing:.08em; color: var(--dim2); margin-bottom:.25rem; }
+.dval { display:block; font-size: .87rem; color: #B6BBBE; }
+
+/* Storyboard overview grid */
+.overview { margin-bottom: 3.5rem; }
+.overview-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; background: var(--line); border: 1px solid var(--line); }
+@media (max-width: 760px) { .overview-grid { grid-template-columns: repeat(2, 1fr); } }
+.ov-tile { position: relative; background: #000; overflow: hidden; }
+.ov-tile img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; opacity: .92; }
+.ov-tile.cctv img { filter: grayscale(.25) saturate(1.3) hue-rotate(185deg) brightness(.8) contrast(1.05); }
+.ov-num { position: absolute; top: .5rem; left: .5rem; font-family:'IBM Plex Mono',monospace; font-size: 11px; font-weight: 600; color: var(--text); background: rgba(12,14,16,0.72); padding: .2rem .5rem; letter-spacing: .04em; }
+.ov-tile.cctv .ov-num { color: var(--blue); }
+.ov-tag { position: absolute; bottom: .5rem; right: .5rem; font-family:'IBM Plex Mono',monospace; font-size: 9px; letter-spacing: .08em; color: var(--blue); border: 1px solid var(--blue); background: rgba(12,14,16,0.72); padding: .15rem .4rem; }
+.overview-note { margin-top: .9rem; font-family:'IBM Plex Mono',monospace; font-size: 11px; color: var(--dim2); letter-spacing: .02em; }
+.overview-note .sw { color: var(--blue); }
+
+/* Video blocks */
+.video-block { margin-top: 3rem; }
+.video-frame { border: 1px solid var(--line); background: #000; position: relative; }
+.video-frame video { width: 100%; display:block; }
+.video-label { display:flex; justify-content: space-between; align-items:center; margin-top: .9rem; font-family:'IBM Plex Mono',monospace; font-size: 11px; color: var(--dim); letter-spacing:.06em; }
+.video-label .rec-dot { display:inline-block; margin-right:.4rem; }
+
+/* Casting cards */
+.cast-card { display: grid; grid-template-columns: 1fr 1.3fr; gap: 2.4rem; padding: 3rem 0; border-top: 1px solid var(--line); }
+.cast-card:first-of-type { border-top: none; }
+@media (max-width: 760px) { .cast-card { grid-template-columns: 1fr; gap: 1.4rem; } }
+.cast-media { border: 1px solid var(--line); overflow:hidden; }
+.cast-media img, .cast-media video { width:100%; aspect-ratio: 4/5; object-fit: cover; }
+.cast-name { font-size: 1.4rem; font-weight: 700; margin: 0 0 1rem; }
+.cast-card p { color: #CBD0D2; }
+
+/* Light module — whole card on white, for the "photo that wakes up" cast entries */
+.cast-card.light {
+  background: #fff; color: #1C2024;
+  margin-left: -1.6rem; margin-right: -1.6rem;
+  padding: 1.6rem;
+}
+@media (max-width: 760px) { .cast-card.light { margin-left:0; margin-right:0; } }
+.cast-card.light .cast-media { border-color: #fff; }
+.cast-card.light .cast-name { color: #111416; }
+.cast-card.light p { color: #4B5257; }
+
+/* Full-width "text, then video" light module */
+.light-wide {
+  background: #fff; color: #1C2024; padding: 2.2rem 1.6rem;
+  margin: 0 -1.6rem 0;
+}
+@media (max-width: 760px) { .light-wide { margin-left:0; margin-right:0; } }
+.light-wide p { color: #4B5257; max-width: 62ch; }
+
+/* True edge-to-edge video, breaks out of the content column */
+.video-bleed {
+  width: 100%;
+  max-width: 100%;
+  margin: 2rem 0 3rem;
+  background: #000;
+}
+.video-bleed video { width: 100%; display: block; aspect-ratio: 16/9; object-fit: cover; }
+.video-bleed .video-label { margin: .9rem 0 0; padding: 0 .9rem .8rem; }
+
+.loc-imgs { display:grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 1.6rem; }
+.loc-imgs img { aspect-ratio: 4/3; object-fit: cover; width: 100%; }
+
+/* Tech spec */
+.spec-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+@media (max-width: 700px) { .spec-grid { grid-template-columns: 1fr; } }
+.spec-field { background: var(--bg); padding: 1.5rem 1.8rem; }
+.spec-label { font-family:'IBM Plex Mono',monospace; font-size: 10px; letter-spacing: .1em; color: var(--red); margin-bottom: .5rem; display:block; }
+.spec-val { color: var(--text); font-size: .95rem; }
+
+/* Closer */
+.closer {
+  padding: 7rem 1.25rem; text-align: center;
+  background: radial-gradient(ellipse 100% 100% at 50% 100%, #1b2024 0%, #0C0E10 70%);
+}
+.closer h2 { font-size: clamp(2.2rem, 6vw, 4rem); margin: 0 0 .8rem; font-weight: 800; }
+.closer p { color: var(--dim); max-width: none; font-size: 1.05rem; }
+.closer .rec-dot { margin: 0 auto 1.5rem; }
+
+footer { padding: 2.5rem 1.25rem; text-align:center; font-family:'IBM Plex Mono',monospace; font-size: 11px; color: var(--dim2); }
+
+::selection { background: var(--red); color: #fff; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .rec-dot { animation: none; } }
+
+
+/* ===== 2026-10-05 treatment revision ===== */
+:root{
+  --pepsi-blue:#0025FF;
+  --pepsi-red:#FF1400;
+  --paper:#FFFFFF;
+  --ink:#0C0E10;
+}
+
+/* Hero / title page */
+.hero{min-height:100vh;justify-content:flex-start;padding:5.5rem max(1.25rem,calc((100vw - 1180px)/2 + 1.25rem)) 2.5rem;background:#14171A;}
+.hero h1{font-size:clamp(2.7rem,6vw,5rem);line-height:.95;margin:2.8rem 0 .35rem;letter-spacing:.01em;}
+.hero-sub{font-size:clamp(1rem,1.6vw,1.25rem);margin:0;color:#B7BDC3;max-width:none;}
+.hero-sodastop{font-size:clamp(5rem,17vw,13rem);font-weight:800;line-height:.82;letter-spacing:-.045em;color:var(--blue);margin:4.6rem 0 .7rem;white-space:nowrap;}
+.hero-eating{font-size:clamp(1.05rem,1.8vw,1.55rem);font-weight:700;letter-spacing:.03em;color:var(--red);}
+.hero-treatment{font-size:clamp(1.5rem,3vw,2.6rem);margin:6rem 0 0;color:#fff;}
+.hero-year{font-family:'IBM Plex Mono',monospace;color:var(--dim);font-size:1.15rem;margin:auto 0 2rem;}
+.hero-meta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem 2.4rem;border-top:1px solid #333941;padding-top:1.2rem;width:100%;}
+.hero-meta b{font-size:1rem;color:#fff;}
+.hero-meta .mi{color:#717980;}
+@media(max-width:760px){
+ .hero{padding:4.5rem 1.25rem 2rem;min-height:100svh;}
+ .hero-sodastop{font-size:clamp(4rem,20vw,7rem);margin-top:3.5rem;white-space:normal;}
+ .hero-treatment{margin-top:4rem;}
+ .hero-meta{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:440px){.hero-meta{grid-template-columns:1fr}.hero-sodastop{font-size:18vw}.hero h1{font-size:2.7rem}}
+
+/* Pepsi palette: all small labels are deliberately high-contrast */
+.field-label,.dlabel,.spec-label,.frame-sub,.act-num,.video-label,.overview-note,.mi{color:var(--blue)!important;}
+.dlabel:nth-of-type(even),.spec-label{color:var(--red)!important;}
+.sec-num{color:var(--red)!important;}
+
+/* Key message / typing loop */
+.key-message-card{background:var(--blue)!important;border:0!important;color:#fff!important;box-shadow:0 0 0 1px rgba(255,255,255,.08) inset;}
+.key-message-card .field-label{color:#fff!important;opacity:.72;}
+.key-message-card p{color:#fff!important;}
+.key-message-type{font-size:clamp(1.25rem,2vw,1.7rem);line-height:1.12;font-weight:800;min-height:3em;letter-spacing:-.01em;}
+.key-message-type::after{content:'|';color:var(--red);animation:cursorBlink .8s steps(1) infinite;margin-left:.08em;}
+@keyframes cursorBlink{50%{opacity:0}}
+
+/* UK SodaStop creative reference */
+.sodastop-reference{margin-top:3.5rem;padding:3rem 0;background:#fff;color:#111416;border-top:10px solid var(--blue);border-bottom:10px solid var(--red);}
+.sodastop-reference .ref-grid{display:grid;grid-template-columns:.9fr 1.3fr;gap:2.5rem;align-items:start;}
+.sodastop-reference h3{font-size:clamp(1.8rem,3vw,2.7rem);margin:0 0 1rem;line-height:1;letter-spacing:-.02em;}
+.sodastop-reference p{color:#4B5257;}
+.sodastop-reference video{width:100%;aspect-ratio:16/9;object-fit:cover;background:#000;}
+.sodastop-reference .field-label{color:var(--blue)!important;}
+@media(max-width:760px){.sodastop-reference .ref-grid{grid-template-columns:1fr}.sodastop-reference{padding:2.2rem 0}}
+
+/* AI highlight */
+.ai-highlight{font-size:clamp(1.18rem,2vw,1.45rem);line-height:1.4!important;color:#fff!important;font-weight:600;border-left:6px solid var(--blue);padding:1rem 1.2rem;background:linear-gradient(90deg,rgba(0,37,255,.16),transparent);max-width:54rem!important;}
+
+/* CCTV emphasis */
+.ov-tile.cctv{outline:3px solid var(--blue);outline-offset:-3px;box-shadow:inset 0 0 0 999px rgba(0,37,255,.08);}
+.ov-tile.cctv img{filter:grayscale(.85) contrast(1.15) brightness(.8) sepia(.12) hue-rotate(175deg) saturate(1.75);}
+.ov-tile.cctv .ov-tag{background:var(--blue);color:#fff;border-color:var(--blue);font-weight:700;}
+.frame.cctv .frame-imgs{position:relative;border:3px solid var(--blue);box-shadow:0 0 0 1px rgba(0,37,255,.22);}
+.frame.cctv .frame-imgs::after{content:'CCTV';position:absolute;right:.65rem;bottom:.65rem;background:var(--blue);color:#fff;font:600 10px/1 'IBM Plex Mono',monospace;letter-spacing:.1em;padding:.4rem .55rem;pointer-events:none;}
+.frame.cctv .frame-imgs img{filter:grayscale(.75) contrast(1.08) sepia(.08) hue-rotate(175deg) saturate(1.35);}
+
+/* Animatic = assembled result */
+.animatic-block{margin-top:4rem;padding:1.3rem;background:#0F1215;border:3px solid var(--blue);box-shadow:0 0 0 1px rgba(255,255,255,.05) inset;}
+.animatic-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin:0 0 1rem;}
+.animatic-title{font-size:clamp(1.6rem,3vw,2.5rem);font-weight:800;color:#fff;letter-spacing:-.02em;}
+.animatic-meta{font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--blue);letter-spacing:.05em;}
+.animatic-block .video-frame{border:0;}
+.animatic-block video{width:100%;aspect-ratio:16/9;object-fit:cover;}
+@media(max-width:600px){.animatic-head{display:block}.animatic-meta{display:block;margin-top:.35rem}}
+
+/* Full-width white casting pages */
+#references .cast-card{width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:3.5rem max(1.25rem,calc((100vw - 920px)/2 + 1.25rem));background:#fff;color:#111416;border:0;border-bottom:24px solid var(--bg);grid-template-columns:minmax(260px,.95fr) minmax(0,1.25fr);}
+#references .cast-card .cast-media{border:0;background:#fff;}
+#references .cast-card .cast-name{color:#111416;}
+#references .cast-card p{color:#4B5257;}
+#references .cast-card.light{margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);}
+#references .light-wide{width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:2.5rem max(1.25rem,calc((100vw - 920px)/2 + 1.25rem));border-bottom:24px solid var(--bg);}
+.character-board{width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);background:#fff;padding:0 max(1.25rem,calc((100vw - 1180px)/2 + 1.25rem)) 3rem;border-bottom:24px solid var(--bg);}
+.character-board img{width:100%;height:auto;display:block;}
+@media(max-width:760px){
+ #references .cast-card{grid-template-columns:1fr;padding:2rem 1.25rem;border-bottom-width:16px;}
+ .character-board{padding:0 0 1.5rem;border-bottom-width:16px;}
+ #references .light-wide{padding:2rem 1.25rem;border-bottom-width:16px;}
+}
+
+/* Duo video: autoplay loop block */
+.video-bleed{border-top:8px solid var(--blue);border-bottom:8px solid var(--red);}
+.video-bleed video{background:#000;}
+
+/* Location: vertical frames */
+.loc-imgs{display:grid;grid-template-columns:1fr;gap:1.25rem;background:transparent;border:0;margin-top:1.8rem;}
+.loc-imgs img{width:100%;height:auto;aspect-ratio:auto;object-fit:contain;border:1px solid var(--line);}
+
+/* Product */
+.product-section{background:#fff;color:#111416;}
+.product-section .sec-title{color:#111416;}
+.product-section .product-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:3rem;align-items:center;}
+.product-section p{color:#4B5257;font-size:1.08rem;}
+.product-section .can-wrap{display:flex;justify-content:center;align-items:center;min-height:420px;background:#F6F7F8;}
+.product-section .can-wrap img{max-height:520px;width:auto;filter:drop-shadow(0 18px 26px rgba(0,0,0,.16));}
+@media(max-width:700px){.product-section .product-grid{grid-template-columns:1fr}.product-section .can-wrap{min-height:300px}.product-section .can-wrap img{max-height:390px}}
+
+/* Music */
+.music-section{background:#0B0D0F;position:relative;overflow:hidden;}
+.music-section::before{content:'';position:absolute;inset:0;background:linear-gradient(120deg,rgba(0,37,255,.15),transparent 48%,rgba(255,20,0,.09));pointer-events:none;}
+.music-section .wrap{position:relative;}
+.music-copy{max-width:48rem;color:#CBD0D2;}
+.listen-button{appearance:none;border:0;background:var(--blue);color:#fff;font:700 .9rem/1 'IBM Plex Mono',monospace;letter-spacing:.06em;padding:1rem 1.4rem;cursor:pointer;margin-top:1.1rem;box-shadow:0 0 0 1px rgba(255,255,255,.16) inset;transition:transform .15s ease,background .15s ease;}
+.listen-button:hover{background:var(--red);transform:translateY(-1px)}
+.listen-button[aria-pressed='true']{background:var(--red);}
+
+/* Small headings everywhere */
+.dlabel,.field-label,.spec-label{font-weight:700;text-transform:uppercase;}
+
+/* Product / white modules keep blue-red logic */
+.product-section .sec-num{color:var(--red)!important;}
+.product-section .field-label{color:var(--blue)!important;}
+
+/* Footer / rec */
+.rec-bar .case{color:#fff}.rec-dot{background:var(--red)}
+
+@media(prefers-reduced-motion:reduce){.key-message-type::after{animation:none}}
+
+
+/* ===== 2026-10-05 round 2 corrections ===== */
+/* UK reference: video baseline follows the bottom of the text column */
+.sodastop-reference .ref-grid{align-items:end;}
+@media(max-width:760px){.sodastop-reference .ref-grid{align-items:start;}}
+
+/* Storyboard: every CCTV frame gets an unmistakable Pepsi-blue border. */
+.overview-grid{background:var(--bg);}
+.ov-tile{border:1px solid var(--line);}
+.ov-tile.cctv{border:3px solid var(--blue);outline:none!important;box-shadow:inset 0 0 0 999px rgba(0,37,255,.08);}
+.ov-tile.cctv.endcard{box-shadow:none;}
+.ov-tile.cctv.endcard img{filter:none!important;opacity:1!important;}
+/* Keep the end card logo + typography in actual Pepsi colors in the detailed frame too. */
+.frame.cctv .frame-imgs img.endcard-img{filter:none!important;opacity:1!important;}
+
+/* ===== MICRO LABEL WHITE PILLS ===== */
+/* Technical micro-headings on dark storyboard cards: Pepsi blue on white for maximum contrast. */
+.dlabel{
+  display:inline-block!important;
+  width:auto!important;
+  color:var(--blue)!important;
+  background:#fff!important;
+  padding:.28rem .48rem .24rem!important;
+  margin-bottom:.55rem!important;
+  font-weight:700!important;
+  line-height:1!important;
+  letter-spacing:.08em!important;
+}
+
+
+/* ===== FINAL DESKTOP + MOBILE QA PASS · 2026-10-05 ===== */
+:root{
+  --blue:#0025FF;
+  --red:#FF1400;
+  --pepsi-blue:#0025FF;
+  --pepsi-red:#FF1400;
+}
+
+/* Character boards are visual dossiers: black field, centered board. */
+#references .character-board{
+  background:var(--bg)!important;
+  padding:2.5rem max(1.25rem,calc((100vw - 1180px)/2 + 1.25rem)) 3rem!important;
+  border-bottom:24px solid var(--bg)!important;
+}
+#references .character-board img{
+  display:block;
+  width:100%;
+  max-width:1180px;
+  height:auto;
+  margin:0 auto;
+}
+
+/* Duo portrait is deliberately larger than the other casting stills. */
+#references .cast-card.duo-card{
+  grid-template-columns:minmax(0,1.5fr) minmax(280px,1fr)!important;
+  padding-left:max(1.25rem,calc((100vw - 1180px)/2 + 1.25rem))!important;
+  padding-right:max(1.25rem,calc((100vw - 1180px)/2 + 1.25rem))!important;
+  align-items:center;
+}
+#references .duo-card .cast-media img{
+  aspect-ratio:auto!important;
+  object-fit:contain!important;
+  width:100%;
+  height:auto!important;
+}
+
+/* The moving-duo commentary belongs to the black media field. */
+#references .light-wide.duo-motion-copy{
+  background:var(--bg)!important;
+  color:var(--text)!important;
+  border-bottom:0!important;
+  padding-top:2.8rem!important;
+  padding-bottom:2rem!important;
+}
+#references .light-wide.duo-motion-copy p{
+  color:#CBD0D2!important;
+  max-width:60rem;
+}
+#references .duo-video{
+  max-width:1180px!important;
+  width:calc(100% - 2.5rem)!important;
+  margin:0 auto 3.5rem!important;
+  border-top:6px solid var(--blue)!important;
+  border-bottom:6px solid var(--red)!important;
+}
+#references .duo-video video{
+  width:100%;
+  aspect-ratio:16/9;
+  object-fit:cover;
+}
+
+/* Paired IN/OUT frames remain full-size: A and B are stacked, not squeezed. */
+.frame-imgs.two.phase-stack{
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:.9rem!important;
+  background:transparent!important;
+  border:0!important;
+  overflow:visible!important;
+}
+.phase-frame{
+  position:relative;
+  overflow:hidden;
+  background:#000;
+  border:1px solid var(--line);
+}
+.phase-frame img{
+  display:block;
+  width:100%;
+  height:auto!important;
+  aspect-ratio:16/9!important;
+  object-fit:cover!important;
+}
+.phase-tag{
+  position:absolute;
+  top:.7rem;
+  left:.7rem;
+  min-width:2rem;
+  text-align:center;
+  background:#fff;
+  color:var(--blue);
+  font:700 .78rem/1 'IBM Plex Mono',monospace;
+  letter-spacing:.06em;
+  padding:.45rem .55rem .4rem;
+  box-shadow:0 0 0 1px rgba(0,37,255,.18);
+}
+.frame.cctv .frame-imgs.phase-stack{
+  border:0!important;
+  box-shadow:none!important;
+}
+.frame.cctv .frame-imgs.phase-stack::after{display:none!important;}
+.frame.cctv .phase-frame{border:3px solid var(--blue)!important;}
+.frame.cctv .phase-frame img:not(.endcard-img){filter:grayscale(.75) contrast(1.08) sepia(.08) hue-rotate(175deg) saturate(1.35);}
+.frame.cctv .phase-frame img.endcard-img{filter:none!important;opacity:1!important;}
+
+/* Animatic = assembled result after storyboard. */
+.animatic-block{
+  margin-top:4rem!important;
+  padding:1rem!important;
+  background:#101316!important;
+  border:0!important;
+  box-shadow:0 0 0 1px #20262b inset!important;
+}
+.animatic-head{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:1rem!important;
+  margin:0 0 1rem!important;
+  padding:1rem 1.35rem!important;
+  background:var(--blue)!important;
+}
+.animatic-title{
+  color:#fff!important;
+  font-size:clamp(1.8rem,3.2vw,2.8rem)!important;
+  line-height:1!important;
+  font-weight:800!important;
+}
+.animatic-meta{
+  color:#fff!important;
+  opacity:.95;
+  font-size:.8rem!important;
+}
+.animatic-block .video-frame{border:1px solid #31383f!important;}
+
+/* Pepsi can: pure white field, no accidental grey box/shadow. */
+.product-section .can-wrap{
+  background:#fff!important;
+  min-height:0!important;
+  padding:1.5rem!important;
+}
+.product-section .can-wrap img{
+  filter:none!important;
+  box-shadow:none!important;
+  max-height:560px!important;
+  max-width:100%!important;
+}
+
+/* Technical micro headings on dark areas: firm blue on white chips. */
+#storyboard .dlabel{
+  color:var(--blue)!important;
+  background:#fff!important;
+  border:0!important;
+}
+
+/* Full-color brand endcard, never toned/desaturated. */
+.ov-tile.endcard img,
+.ov-tile.cctv.endcard img,
+.frame img.endcard-img{
+  filter:none!important;
+  opacity:1!important;
+}
+.overview-grid{background:var(--bg)!important;}
+
+/* ---- TABLET ---- */
+@media (max-width:1024px){
+  .wrap{max-width:820px;}
+  .wrap-wide{max-width:940px;}
+  section{padding:4rem 0;}
+  #references .cast-card.duo-card{
+    grid-template-columns:minmax(0,1.25fr) minmax(260px,1fr)!important;
+  }
+}
+
+/* ---- MOBILE ---- */
+@media (max-width:760px){
+  body{font-size:16px;line-height:1.5;}
+  .rec-bar{
+    height:34px;
+    padding-left:.8rem;
+    padding-right:.8rem;
+    font-size:9px;
+    gap:.35rem;
+    white-space:nowrap;
+    overflow:hidden;
+  }
+  .rec-bar .case{overflow:hidden;text-overflow:ellipsis;}
+  .rec-bar .spacer{display:none;}
+  .wrap,.wrap-wide{max-width:none;padding-left:1rem;padding-right:1rem;}
+  section{padding:3.25rem 0;}
+  .sec-head{gap:.6rem;margin-bottom:1.6rem;align-items:flex-start;}
+  .sec-num{font-size:11px;padding-top:.28rem;}
+  .sec-title{font-size:clamp(1.7rem,8vw,2.2rem);line-height:1;overflow-wrap:anywhere;}
+  .lede{font-size:1rem;max-width:none;}
+  p{max-width:none;}
+
+  /* Hero becomes a deliberate vertical title page, not a squeezed desktop. */
+  .hero{
+    min-height:auto!important;
+    padding:3.4rem 1rem 2.2rem!important;
+  }
+  .hero-corner{font-size:9px;}
+  .hero-corner.tl{top:1rem;left:1rem;}
+  .hero-corner.tr{top:1rem;right:1rem;}
+  .hero h1{font-size:clamp(2.65rem,13vw,4rem)!important;line-height:.92!important;margin:2.6rem 0 .55rem!important;}
+  .hero-sub{font-size:.98rem!important;line-height:1.35!important;}
+  .hero-sodastop{font-size:clamp(3.5rem,19vw,6rem)!important;line-height:.82!important;margin:3.3rem 0 .6rem!important;white-space:normal!important;overflow-wrap:anywhere;}
+  .hero-eating{font-size:1.05rem!important;line-height:1.2!important;}
+  .hero-treatment{font-size:1.55rem!important;margin:3.8rem 0 2.8rem!important;}
+  .hero-meta{grid-template-columns:1fr 1fr!important;gap:1.1rem 1.25rem!important;padding-top:1rem!important;}
+  .hero-meta b{font-size:.95rem!important;}
+
+  .two-col,.why-grid,.signature .wrap,.sodastop-reference .ref-grid,.spec-grid,.product-section .product-grid{
+    grid-template-columns:1fr!important;
+  }
+  .case-card,.script-block{padding:1.25rem 1.1rem;}
+  .signature{padding:2.3rem 0;}
+  .signature .wrap{gap:1.4rem;}
+  .signature-quote{font-size:1.45rem;}
+  .key-message-type{font-size:1.25rem;min-height:0;}
+  .sodastop-reference{margin-top:2.5rem;padding:2.3rem 0;border-top-width:7px;border-bottom-width:7px;}
+  .sodastop-reference .ref-grid{gap:1.4rem;align-items:start!important;}
+  .sodastop-reference h3{font-size:2rem;}
+  .ai-highlight{font-size:1.08rem!important;padding:.9rem 1rem;}
+
+  .acts{gap:1px;}
+  .act{grid-template-columns:1fr!important;gap:.45rem!important;padding:1.3rem 1.1rem!important;}
+  .why-grid{gap:1.3rem!important;}
+  .why-grid p[style]{grid-column:auto!important;}
+  .script-line{font-size:.82rem;padding:.8rem .85rem;}
+
+  /* Storyboard overview remains compact; detailed shots become full-width vertical. */
+  .overview{margin-bottom:2.3rem;}
+  .overview-grid{grid-template-columns:repeat(2,1fr)!important;gap:4px!important;border:0!important;}
+  .ov-tile{border:0;}
+  .ov-tile.cctv{border:2px solid var(--blue)!important;}
+  .ov-num{font-size:9px;top:.35rem;left:.35rem;}
+  .ov-tag{font-size:8px;right:.35rem;bottom:.35rem;}
+  .frame{grid-template-columns:1fr!important;gap:1.2rem!important;padding:2.1rem 0!important;}
+  .frame-imgs{width:100%;}
+  .frame-imgs img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;}
+  .frame-head{margin-bottom:.7rem;flex-wrap:wrap;}
+  .frame-num{font-size:.9rem;}
+  .frame-action{font-size:1rem;}
+  .frame-lines{margin-bottom:1rem;}
+  .line{font-size:.8rem;padding:.7rem .8rem;}
+  .frame-data{grid-template-columns:1fr!important;gap:.85rem!important;}
+  .dval{font-size:.9rem;}
+  .phase-frame{border-width:1px;}
+  .phase-tag{top:.5rem;left:.5rem;font-size:.7rem;padding:.4rem .5rem;}
+
+  .animatic-block{margin-top:2.8rem!important;padding:.65rem!important;}
+  .animatic-head{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:.3rem!important;padding:.85rem 1rem!important;margin-bottom:.65rem!important;}
+  .animatic-title{font-size:1.65rem!important;}
+  .animatic-meta{font-size:.7rem!important;}
+
+  /* Casting: true editorial pages on white, dossiers/video on black. */
+  #references .cast-card,
+  #references .cast-card.duo-card{
+    grid-template-columns:1fr!important;
+    gap:1.25rem!important;
+    padding:2rem 1rem!important;
+    border-bottom-width:14px!important;
+  }
+  #references .cast-media{max-width:100%;}
+  #references .cast-media img,#references .cast-media video{width:100%;height:auto;}
+  #references .cast-media video{aspect-ratio:4/5;object-fit:cover;}
+  #references .duo-card .cast-media img{aspect-ratio:auto!important;object-fit:contain!important;}
+  #references .character-board{
+    padding:1rem 0 1.35rem!important;
+    border-bottom-width:14px!important;
+  }
+  #references .character-board img{width:100%;max-width:none;}
+  #references .light-wide.duo-motion-copy{
+    padding:2rem 1rem 1.35rem!important;
+  }
+  #references .duo-video{
+    width:calc(100% - 2rem)!important;
+    margin:0 auto 2.5rem!important;
+    border-top-width:5px!important;
+    border-bottom-width:5px!important;
+  }
+  #references .duo-video .video-label{padding:0 .2rem .5rem!important;font-size:9px!important;}
+
+  .loc-imgs{gap:.9rem;}
+  .loc-imgs img{width:100%;height:auto;}
+
+  .product-section .product-grid{gap:1.5rem!important;}
+  .product-section .can-wrap{padding:1rem!important;}
+  .product-section .can-wrap img{max-height:440px!important;max-width:80%!important;}
+  .music-copy{max-width:none;}
+  .listen-button{width:100%;text-align:center;}
+  .spec-field{padding:1.2rem 1.1rem;}
+
+  .closer{padding:4.5rem 1rem;}
+  .closer h2{font-size:clamp(2.3rem,13vw,4rem);line-height:.95;overflow-wrap:anywhere;}
+  .closer p{font-size:1rem;}
+  footer{padding:1.7rem 1rem;font-size:9px;line-height:1.45;}
+}
+
+@media (max-width:420px){
+  .hero-meta{grid-template-columns:1fr 1fr!important;}
+  .hero-sodastop{font-size:14vw!important;white-space:nowrap!important;overflow-wrap:normal!important;}
+  .overview-grid{grid-template-columns:repeat(2,1fr)!important;}
+  .product-section .can-wrap img{max-width:88%!important;}
+}
+
+@media (max-width:340px){
+  .hero-meta{grid-template-columns:1fr!important;}
+  .overview-grid{grid-template-columns:1fr!important;}
+}
+</style>
+<style>
+</style></head>
+<body>
+<div class="rec-bar">
+<span aria-hidden="true" class="rec-dot"></span>
+<span>REC</span>
+<span class="sep">/</span>
+<span class="case">PEPSI PATROL — THAT'S CRIMINAL</span>
+<span class="spacer"></span>
+<span>SODASTOP / PL · 2026</span>
+</div>
+<header class="hero"><span class="hero-corner tl">CAM 01 · PARKING LOT · PL</span><span class="hero-corner tr"><span class="rec">● REC</span><br/>00:00:00:00</span><h1>PEPSI PATROL</h1><p class="hero-sub">Food without Pepsi? Reason to intervene</p><div class="hero-sodastop">EATING OUT</div><div class="hero-eating">Based on UK SODASTOP</div><p class="hero-treatment">Director's treatment</p><div class="hero-meta"><div><span class="mi">КЛИЕНТ</span><b>Pepsi</b></div><div><span class="mi">БРЕНД</span><b>Pepsi Max</b></div><div><span class="mi">РЫНОК</span><b>Poland</b></div><div><span class="mi">ГОД</span><b>2026</b></div></div></header>
+<main>
+<section id="concept">
+<div class="wrap">
+<div class="sec-head"><span class="sec-num mono">01</span><h2 class="sec-title">Концепция</h2></div>
+<div class="two-col">
+<div class="case-card">
+<span class="field-label">Логлайн</span>
+<p>На обычной вечерней парковке Войцек и Ева спокойно едят в машине, пока их ужин не прерывает Pepsi Patrol: Ага и Дарек обнаружили серьёзное нарушение — есть без Pepsi Max. That's criminal.</p>
+</div>
+<div class="case-card">
+<span class="field-label">Жанр</span>
+<p>Deadpan comedy / mockumentary / observational realism. Абсурдная бытовая ситуация разыгрывается с абсолютной документальной серьёзностью. Никто специально не шутит и не подмигивает зрителю — чем профессиональнее действует патруль, тем смешнее происходящее.</p>
+</div>
+</div>
+</div>
+<div class="signature">
+<div class="wrap">
+<div>
+<span class="signature-key">SIGNATURE VISUAL</span>
+<p class="signature-quote">CCTV превращается в кино.</p>
+<p class="lede" style="margin-top:1rem;">История начинается как случайно зафиксированное камерой наблюдения происшествие. С появлением Pepsi Patrol наблюдение становится участием, реакции выходят на первый план. В кульминации состояние Войцека буквально меняет изображение: камера постепенно теряет горизонталь и уходит в Dutch angle.</p>
+</div>
+<div class="case-card key-message-card">
+<span class="field-label">Key message</span>
+<p class="key-message-type" data-text="MEALS WITHOUT PEPSI MAX — THAT'S CRIMINAL" id="key-message-type" style="font-weight:600; color:var(--text);">MEALS WITHOUT PEPSI MAX — THAT'S CRIMINAL</p>
+<p>Pepsi Max — не просто напиток рядом с едой, а недостающая часть удовольствия от неё. Если еда уже есть, Pepsi Max должна быть рядом.</p>
+</div>
+</div>
+</div><div class="sodastop-reference"><div class="wrap-wide ref-grid"><div><span class="field-label">ТВОРЧЕСКИЙ ОРИЕНТИР</span><h3>SODASTOP — ОРИГИНАЛЬНЫЙ UK-РОЛИК</h3><p>Наш ролик — творческая адаптация британского SodaStop. Мы сохраняем главное, что делает оригинал таким точным и смешным: документальную достоверность, наблюдательную камеру, бытовую среду и абсолютную серьёзность героев внутри абсурдной ситуации.</p><p>На всех этапах — от генерации персонажей и движения до камеры, монтажа и актёрских реакций — SodaStop остаётся нашим главным визуальным и тональным ориентиром. Мы всё время держим этот ролик в голове, чтобы не уйти в рекламный глянец и сохранить ощущение реального происшествия, случайно попавшего в объектив.</p></div><div><video aria-label="Оригинальный британский ролик SodaStop" controls="" playsinline="" preload="metadata"><source src="assets/video/video_01.mp4" type="video/mp4"/></video></div></div></div>
+<div class="wrap" style="margin-top:3.5rem;">
+<span class="field-label">AI как часть режиссёрской идеи</span>
+<div class="body-text" style="max-width:48rem;">
+<p class="ai-highlight">Особенно интересно принять AI-челлендж: сделать не просто убедительный реалистичный «съёмочный» ролик, а добиться полной стилизации под документальное наблюдение — как в оригинальном UK-ролике.</p>
+<p>Мы намеренно отказываемся от типичной AI-красоты: идеального света, безупречных лиц, рекламного глянца, чрезмерно эффектной камеры. Нам нужны шероховатость, случайность, несовершенство, бытовой свет, настоящие человеческие реакции — ощущение, что камера не создала событие, а просто оказалась рядом и зафиксировала его.</p>
+<p>Именно здесь AI становится не способом сделать «красивее», а инструментом имитации реальности. Сделать искусственное настолько неидеальным, чтобы оно воспринималось настоящим, — один из главных визуальных вызовов проекта.</p>
+</div>
+</div>
+</section>
+<section id="synopsis">
+<div class="wrap">
+<div class="sec-head"><span class="sec-num mono">—</span><h2 class="sec-title">Синопсис в трёх актах</h2></div>
+<div class="acts">
+<div class="act"><span class="act-num mono">I</span><div><p class="act-title">НАРУШЕНИЕ</p><p>Войцек и Ева сидят в припаркованной машине и едят. Обычный вечер, обычная польская парковка. Камера наблюдения замечает Агу и Дарека: они увидели нарушение и уже «на задании».</p></div></div>
+<div class="act"><span class="act-num mono">II</span><div><p class="act-title">ВМЕШАТЕЛЬСТВО</p><p>Ага сообщает о проблеме и выдаёт Pepsi Max. Войцек подчиняется, делает большой глоток — WOW! Темп ускоряется, камера уходит в Dutch angle. Ева быстро понимает правила игры; Ага отправляет Дарека с Pepsi к ней.</p></div></div>
+<div class="act"><span class="act-num mono">III</span><div><p class="act-title">ДЕЛО ЗАКРЫТО</p><p>Войцек спрашивает: «By the way… are you security?» Ага: «No. We're with Pepsi.» Патруль уходит. В благодарность Войцек и Ева сигналят им вслед и мигают фарами. Порядок восстановлен.</p></div></div>
+</div>
+</div>
+</section>
+<section id="why">
+<div class="wrap">
+<div class="sec-head"><span class="sec-num mono">—</span><h2 class="sec-title">Зачем этот ролик существует</h2></div>
+<p class="lede" style="margin-bottom:2rem;">Еда становится лучше с Pepsi Max — простая продуктовая мысль превращается в маленькую историю со своим миром, героями и правилами.</p>
+<div class="why-grid">
+<p>Вместо привычного рекламного «вкусно, холодно, освежает» возникает почти полицейская операция из-за отсутствующей банки Pepsi. Несоответствие масштаба «преступления» и предельной серьёзности реакции создаёт комедию.</p>
+<p>Главное — никто не пытается быть смешным. Ага и Дарек действительно работают. Войцек действительно выполняет инструкции. Ева быстрее всех понимает правила и начинает получать от ситуации удовольствие.</p>
+<p style="grid-column: 1 / -1;">Продукт невозможно убрать из сценария: Pepsi Max не интегрирована в историю — Pepsi Max является причиной самой истории. Без неё возникает «преступление». С ней восстанавливается порядок.</p>
+</div>
+</div>
+</section>
+<section id="script">
+<div class="wrap">
+<div class="sec-head"><span class="sec-num mono">02</span><h2 class="sec-title">Сценарий</h2></div>
+<div class="script-block">
+<p>Вечер. Парковка у ресторана быстрого питания. Молодая пара на свидании в машине ест бургеры.</p>
+<p>Ага и Дарек стучат в окно. Ага сообщает, что пара не получает от еды полного удовольствия и придётся выпить Pepsi. Она вставляет соломинку в банку и протягивает её Войцеку — почти как тест на алкоголь.</p>
+<div class="script-line">„Mamy podejrzenie, że nie czerpiecie z tego posiłku pełnej przyjemności. Będziecie musieli wypić Pepsi.”<span class="ru">«Мы подозреваем, что вы не получаете от этой еды полного удовольствия. Вам придётся выпить Pepsi.»</span></div>
+<div class="script-line">„Usta na słomkę. I pijemy. Pijemy. Teraz duży łyk.”<span class="ru">«Губы на соломинку. И пьём. Пьём. Теперь большой глоток.»</span></div>
+<p>Войцек подчиняется. Удивление сменяется настоящим удовольствием: «Вау!» Ага: «Lepiej, prawda? Darek, podejdziesz do pani?» Дарек идёт к Еве.</p>
+<div class="script-line">WOJTEK: „A tak w ogóle… jesteście z ochrony?”<span class="ru">«А вообще… вы из охраны?»</span></div>
+<div class="script-line">AGA: „Nie. Jesteśmy z Pepsi.”<span class="ru">«Нет. Мы из Pepsi.»</span></div>
+<span class="script-tag">FOOD WITHOUT PEPSI? THAT'S CRIMINAL + BETTER WITH PEPSI</span>
+</div>
+</div>
+</section>
+<section id="storyboard">
+<div class="wrap-wide">
+<div class="sec-head"><span class="sec-num mono">03</span><h2 class="sec-title">Сториборд</h2></div>
+<p class="lede" style="margin-bottom:2.2rem;">Покадровая режиссура: крупность, ракурс, движение, монтаж. 12 основных кадров / шотов.</p>
+<div class="overview">
+<span class="field-label">Storyboard overview — полная последовательность кадров</span>
+<div class="overview-grid">
+<div class="ov-tile cctv"><img alt="Кадр 01" loading="lazy" src="assets/images/image_01.jpg"/><span class="ov-num">01</span><span class="ov-tag">CCTV</span></div>
+<div class="ov-tile"><img alt="Кадр 02" loading="lazy" src="assets/images/image_02.jpg"/><span class="ov-num">02</span></div>
+<div class="ov-tile"><img alt="Кадр 03" loading="lazy" src="assets/images/image_03.jpg"/><span class="ov-num">03</span></div>
+<div class="ov-tile"><img alt="Кадр 04" loading="lazy" src="assets/images/image_04.jpg"/><span class="ov-num">04</span></div>
+<div class="ov-tile"><img alt="Кадр 05" loading="lazy" src="assets/images/image_05.jpg"/><span class="ov-num">05</span></div>
+<div class="ov-tile"><img alt="Кадр 06" loading="lazy" src="assets/images/image_06.jpg"/><span class="ov-num">06</span></div>
+<div class="ov-tile"><img alt="Кадр 07A" loading="lazy" src="assets/images/image_07.jpg"/><span class="ov-num">07A</span></div>
+<div class="ov-tile"><img alt="Кадр 07B" loading="lazy" src="assets/images/image_08.jpg"/><span class="ov-num">07B</span></div>
+<div class="ov-tile cctv"><img alt="Кадр 08" loading="lazy" src="assets/images/image_09.jpg"/><span class="ov-num">08</span><span class="ov-tag">CCTV</span></div>
+<div class="ov-tile"><img alt="Кадр 09" loading="lazy" src="assets/images/image_10.jpg"/><span class="ov-num">09</span></div>
+<div class="ov-tile"><img alt="Кадр 10" loading="lazy" src="assets/images/image_11.jpg"/><span class="ov-num">10</span></div>
+<div class="ov-tile"><img alt="Кадр 11" loading="lazy" src="assets/images/image_12.jpg"/><span class="ov-num">11</span></div>
+<div class="ov-tile cctv"><img alt="Кадр 12A" loading="lazy" src="assets/images/image_13.jpg"/><span class="ov-num">12A</span><span class="ov-tag">CCTV</span></div>
+<div class="ov-tile cctv endcard"><img alt="Кадр 12B" loading="lazy" src="assets/images/image_14.jpg"/><span class="ov-num">12B</span><span class="ov-tag">CCTV</span></div>
+</div>
+<p class="overview-note"><span class="sw">■</span> синим отмечены CCTV-кадры (с камеры слежения)</p>
+</div>
+<article class="frame cctv">
+<div class="frame-imgs"><img alt="Кадр 01" loading="lazy" src="assets/images/image_01.jpg"/></div>
+<div class="frame-body">
+<div class="frame-head"><span class="frame-num">КАДР 01</span></div>
+<p class="frame-action">Общий CCTV-план парковки. Машина пары и бусик Pepsi задают географию сцены. Ага и Дарек начинают операцию и идут от бусика к машине.</p>
+<div class="frame-data">
+<div class="dfield"><span class="dlabel">Композиция</span><span class="dval">WS / высокий общий. Машина — справа, бусик — слева; между ними читается путь патруля.</span></div>
+<div class="dfield"><span class="dlabel">Камера</span><span class="dval">Статичная CCTV-камера. Слегка несовершенная перспектива и наблюдательная дистанция.</span></div>
+<div class="dfield"><span class="dlabel">Монтаж</span><span class="dval">Establishing shot. Даёт зрителю всю географию до перехода внутрь машины.</span></div>
+<div class="dfield"><span class="dlabel">Переход</span><span class="dval">CUT на внутренний план пары.</span></div>
+<div class="dfield"><span class="dlabel">Аудио</span><span class="dval">Парковочный ambience, дождь/шины вдали. Музыка может начать входить с момента, когда патруль включается в работу.</span></div>
+</div>
+</div>
+</article>
+<article class="frame">
+<div class="frame-imgs"><img alt="Кадр 02" loading="lazy" src="assets/images/image_02.jpg"/></div>
+<div class="frame-body">
+<div class="frame-head"><span class="frame-num">КАДР 02</span></div>
+<p class="frame-action">Войцек и Ева спокойно едят бургеры и ничего не замечают. Ага уже замечает Войцека и «включается»; Дарек идёт за ней, левее по кадру, пока не смотрит на машину.</p>
+<div class="frame-data">
+<div class="dfield"><span class="dlabel">Композиция</span><span class="dval">Ева — слева, Войцек за рулём — справа. Снаружи Ага впереди, Дарек позади и левее.</span></div>
+<div class="dfield"><span class="dlabel">Камера</span><span class="dval">Наблюдательный handheld / medium-wide из салона. Живая, чуть несовершенная композиция.</span></div>
+<div class="dfield"><span class="dlabel">Монтаж</span><span class="dval">Продолжает движение из кадра 1 и подготавливает появление Аги у водительского окна.</span></div>
+<div class="dfield"><span class="dlabel">Переход</span><span class="dval">CUT ближе к водительской двери.</span></div>
+<div class="dfield"><span class="dlabel">Аудио</span><span class="dval">Шорох упаковки, еда, приглушённый ambience парковки.</span></div>
+</div>
+</div>
+</article>
+<article class="frame">
+<div class="frame-imgs"><img alt="Кадр 03" loading="lazy" src="assets/images/image_03.jpg"/></div>
+<div class="frame-body">
+<div class="frame-head"><span class="frame-num">КАДР 03</span></div>
+<p class="frame-action">Ага подходит к водительскому окну и стучит. Войцек запаздывает с реакцией: он всё ещё занят бургером. Дарек остаётся чуть позади.</p>
+<div class="frame-data">
+<div class="dfield"><span class="dlabel">Композиция</span><span class="dval">Ага доминирует у окна; Войцек внутри машины; Дарек — второй план.</span></div>
+<div class="dfield"><span class="dlabel">Камера</span><span class="dval">POV / handheld, лёгкая дрожь. Неидеальное кадрирование усиливает документальность.</span></div>
+<div class="dfield"><span class="dlabel">Монтаж</span><span class="dval">Первый прямой контакт патруля с парой.</span></div>
+<div class="dfield"><span class="dlabel">Переход</span><span class="dval">CUT на открытое окно / начало «допроса».</span></div>
+<div class="dfield"><span class="dlabel">Аудио</span><span class="dval">Чёткий KNOCK-KNOCK по стеклу + естественный ambience.</span></div>
+</div>
+</div>
+</article>
+<article class="frame">
+<div class="frame-imgs"><img alt="Кадр 04" loading="lazy" src="assets/images/image_04.jpg"/></div>
+<div class="frame-body">
+<div class="frame-head"><span class="frame-num">КАДР 04</span></div>
+<p class="frame-action">Окно опущено. Ага предъявляет себя как профессионала Pepsi Patrol и сообщает паре о «нарушении». Войцек ошарашен; Ева наблюдает.</p>
+<div class="frame-lines"><div class="line"><span class="line-who">AGA</span><span class="line-pl">„Mamy podejrzenie, że nie czerpiecie z tego posiłku pełnej przyjemności. Będziecie musieli wypić Pepsi.”</span><span class="line-ru">«Мы подозреваем, что вы не получаете от этой еды полного удовольствия. Вам придётся выпить Pepsi.»</span></div></div>
+<div class="frame-data">
+<div class="dfield"><span class="dlabel">Композиция</span><span class="dval">Ага снаружи у водительского окна; Войцек внутри; Ева читается глубже в салоне.</span></div>
+<div class="dfield"><span class="dlabel">Камера</span><span class="dval">Handheld medium / OTS. Сухая документальная подача без рекламного героизма.</span></div>
+<div class="dfield"><span class="dlabel">Монтаж</span><span class="dval">Диалоговый beat. Держим реакцию Войцека достаточно долго, чтобы комедия сработала.</span></div>
+<div class="dfield"><span class="dlabel">Переход</span><span class="dval">CUT на продукт / руку Аги.</span></div>
+<div class="dfield"><span class="dlabel">Аудио</span><span class="dval">Живой голос Аги, парковочный фон.</span></div>
+</div>
+</div>
+</article>
+<article class="frame">
+<div class="frame-imgs"><img alt="Кадр 05" loading="lazy" src="assets/images/image_05.jpg"/></div>
+<div class="frame-body">
+<div class="frame-head"><span class="frame-num">КАДР 05</span></div>
+<p class="frame-action">Ага протягивает Войцеку банку Pepsi Max со straw — почти как алкотестер. Войцек смотрит прямо на продукт, не понимая, что происходит. Ева едва видна в глубине.</p>
+<div class="frame-lines"><div class="line"><span class="line-who">AGA</span><span class="line-pl">„Usta na słomkę. I pijemy. Pijemy.”</span><span class="line-ru">«Губы на соломинку. И пьём. Пьём.»</span></div></div>
+<div class="frame-data">
+<div class="dfield"><span class="dlabel">Композиция</span><span class="dval">Максимально лаконично: Войцек + банка. От Аги в кадре в основном рука; Ева — слабый BG-акцент.</span></div>
+<div class="dfield"><span class="dlabel">Камера</span><span class="dval">POV / handheld. Продукт и взгляд Войцека в одной визуальной оси.</span></div>
+<div class="dfield"><span class="dlabel">Монтаж</span><span class="dval">Product insert внутри непрерывной сцены.</span></div>
+<div class="dfield"><span class="dlabel">Переход</span><span class="dval">CUT / match по банке к моменту теста.</span></div>
+<div class="dfield"><span class="dlabel">Аудио</span><span class="dval">Тихий шорох банки/соломинки, естественный ambience.</span></div>
+</div>
+</div>
+</article>
+<article class="frame">
+<div class="frame-imgs"><img alt="Кадр 06" loading="lazy" src="assets/images/image_06.jpg"/></div>
+<div class="frame-body">
+<div class="frame-head"><span class="frame-num">КАДР 06</span></div>
+<p class="frame-action">Войцек послушно начинает пить Pepsi. Ева скептически наблюдает за ним и оценивает происходящее.</p>
+<div class="frame-lines"><div class="line"><span class="line-who">AGA</span><span class="line-pl">„Teraz duży łyk.”</span><span class="line-ru">«Теперь большой глоток.»</span></div></div>
+<div class="frame-data">
+<div class="dfield"><span class="dlabel">Композиция</span><span class="dval">Войцек — основной объект; Ева остаётся в связке и читает его реакцию.</span></div>
+<div class="dfield"><span class="dlabel">Камера</span><span class="dval">POV / handheld, затем лёгкий push-in к лицу Войцека.</span></div>
+<div class="dfield"><span class="dlabel">Монтаж</span><span class="dval">Начальная фаза реакции перед payoff.</span></div>
+<div class="dfield"><span class="dlabel">Переход</span><span class="dval">Внутрикадровое развитие / переход к OUT-фазе 7.</span></div>
+<div class="dfield"><span class="dlabel">Аудио</span><span class="dval">Реплика Аги + звук глотка/соломинки.</span></div>
+</div>
+</div>
+</article>
+<article class="frame">
+<div class="frame-imgs two phase-stack"><div class="phase-frame"><img alt="Кадр 07" loading="lazy" src="assets/images/image_07.jpg"/><span class="phase-tag">A</span></div><div class="phase-frame"><img alt="Кадр 07" loading="lazy" src="assets/images/image_08.jpg"/><span class="phase-tag">B</span></div></div>
+<div class="frame-body">
+<div class="frame-head"><span class="frame-num">КАДР 07</span><span class="frame-sub">A / IN · B / OUT</span></div>
+<p class="frame-action">A / IN: Войцек пьёт, Ева внимательно наблюдает. B / OUT: удивление Войцека превращается в искреннее удовольствие; Ева уже заинтересована и взглядом спрашивает «А мне?».</p>
+<div class="frame-lines"><div class="line"><span class="line-who">WOJTEK</span><span class="line-pl">„WOW!”</span><span class="line-ru">«Вау!»</span></div></div>
+<div class="frame-data">
+<div class="dfield"><span class="dlabel">Композиция</span><span class="dval">Один setup, две фазы. В B эмоциональный акцент смещается на раскрытые глаза Войцека и заинтересованный взгляд Евы.</span></div>
+<div class="dfield"><span class="dlabel">Камера</span><span class="dval">Лёгкий датский угол к концу кадра — по мере нарастания эмоций от продукта.</span></div>
+<div class="dfield"><span class="dlabel">Монтаж</span><span class="dval">A/B — не два разных шота, а начало и конец одной реакции.</span></div>
+<div class="dfield"><span class="dlabel">Переход</span><span class="dval">CUT на результат / патруль.</span></div>
+<div class="dfield"><span class="dlabel">Аудио</span><span class="dval">„WOW!” — чисто и коротко.</span></div>
+</div>
+</div>
+</article>
+<article class="frame cctv">
+<div class="frame-imgs"><img alt="Кадр 08" loading="lazy" src="assets/images/image_09.jpg"/></div>
+<div class="frame-body">
+<div class="frame-head"><span class="frame-num">КАДР 08</span></div>
+<p class="frame-action">Ага видит результат и, не теряя профессионального тона, отправляет Дарека к Еве. Дарек начинает обходить машину к пассажирской стороне.</p>
+<div class="frame-lines"><div class="line"><span class="line-who">AGA</span><span class="line-pl">„Lepiej, prawda? Darek, podejdziesz do pani?”</span><span class="line-ru">«Лучше, правда? Дарек, подойдёшь к даме?»</span></div></div>
+<div class="frame-data">
+<div class="dfield"><span class="dlabel">Композиция</span><span class="dval">Ага остаётся у водительской стороны рядом с Войцеком; Дарек начинает движение вокруг машины.</span></div>
+<div class="dfield"><span class="dlabel">Камера</span><span class="dval">Более общий наблюдательный план / CCTV-style side coverage, чтобы ясно прочитать географию движения.</span></div>
+<div class="dfield"><span class="dlabel">Монтаж</span><span class="dval">Мост между тестом Войцека и вручением Pepsi Еве.</span></div>
+<div class="dfield"><span class="dlabel">Переход</span><span class="dval">CUT на пассажирскую сторону.</span></div>
+<div class="dfield"><span class="dlabel">Аудио</span><span class="dval">Реплика Аги, шаги Дарека, парковочный ambience.</span></div>
+</div>
+</div>
+</article>
+<article class="frame">
+<div class="frame-imgs"><img alt="Кадр 09" loading="lazy" src="assets/images/image_10.jpg"/></div>
+<div class="frame-body">
+<div class="frame-head"><span class="frame-num">КАДР 09</span></div>
+<p class="frame-action">Дарек приносит Pepsi Еве. Она уже просекла правила операции и принимает банку спокойно, почти по-королевски: «ну разумеется, мне».</p>
+<div class="frame-data">
+<div class="dfield"><span class="dlabel">Композиция</span><span class="dval">Ева — центр внимания. Дарек у пассажирского окна; Войцек остаётся читаемым внутри машины.</span></div>
+<div class="dfield"><span class="dlabel">Камера</span><span class="dval">Medium / passenger-side coverage. Никакой рекламной «красоты» — сухое наблюдение.</span></div>
+<div class="dfield"><span class="dlabel">Монтаж</span><span class="dval">Комедийный character beat Евы перед вопросом Войцека.</span></div>
+<div class="dfield"><span class="dlabel">Переход</span><span class="dval">CUT на Войцека.</span></div>
+<div class="dfield"><span class="dlabel">Аудио</span><span class="dval">Небольшой предметный звук банки, без реплики.</span></div>
+</div>
+</div>
+</article>
+<article class="frame">
+<div class="frame-imgs"><img alt="Кадр 10" loading="lazy" src="assets/images/image_11.jpg"/></div>
+<div class="frame-body">
+<div class="frame-head"><span class="frame-num">КАДР 10</span></div>
+<p class="frame-action">Войцек наконец формулирует главный бытовой вопрос и обращается к Аге, всё ещё пытаясь понять, кто эти люди.</p>
+<div class="frame-lines"><div class="line"><span class="line-who">WOJTEK</span><span class="line-pl">„A tak w ogóle… jesteście z ochrony?”</span><span class="line-ru">«А вообще… вы из охраны?»</span></div></div>
+<div class="frame-data">
+<div class="dfield"><span class="dlabel">Композиция</span><span class="dval">Крупнее Войцек; Ага может присутствовать краем кадра / OTS.</span></div>
+<div class="dfield"><span class="dlabel">Камера</span><span class="dval">Handheld close-up, почти документальное интервью. Чуть несовершенный угол.</span></div>
+<div class="dfield"><span class="dlabel">Монтаж</span><span class="dval">Пауза после вопроса важна для финального punchline.</span></div>
+<div class="dfield"><span class="dlabel">Переход</span><span class="dval">CUT на Агу.</span></div>
+<div class="dfield"><span class="dlabel">Аудио</span><span class="dval">Реплика Войцека. На конце — короткая пауза.</span></div>
+</div>
+</div>
+</article>
+<article class="frame">
+<div class="frame-imgs"><img alt="Кадр 11" loading="lazy" src="assets/images/image_12.jpg"/></div>
+<div class="frame-body">
+<div class="frame-head"><span class="frame-num">КАДР 11</span></div>
+<p class="frame-action">Ага отвечает сухо и с абсолютной уверенностью. Это финальный punchline сцены.</p>
+<div class="frame-lines"><div class="line"><span class="line-who">AGA</span><span class="line-pl">„Nie. Jesteśmy z Pepsi.”</span><span class="line-ru">«Нет. Мы из Pepsi.»</span></div></div>
+<div class="frame-data">
+<div class="dfield"><span class="dlabel">Композиция</span><span class="dval">Ага снаружи у водительского окна; образ собранный и строгий, без «милашности».</span></div>
+<div class="dfield"><span class="dlabel">Камера</span><span class="dval">Handheld medium / close. Короткий уверенный hold после реплики.</span></div>
+<div class="dfield"><span class="dlabel">Монтаж</span><span class="dval">Комедийная точка перед уходом патруля.</span></div>
+<div class="dfield"><span class="dlabel">Переход</span><span class="dval">CUT на финальный общий CCTV.</span></div>
+<div class="dfield"><span class="dlabel">Аудио</span><span class="dval">Реплика Аги — максимально сухо.</span></div>
+</div>
+</div>
+</article>
+<article class="frame cctv">
+<div class="frame-imgs two phase-stack"><div class="phase-frame"><img alt="Кадр 12" loading="lazy" src="assets/images/image_13.jpg"/><span class="phase-tag">A</span></div><div class="phase-frame"><img alt="Кадр 12B — финальная брендовая графика" class="endcard-img" loading="lazy" src="assets/images/image_14.jpg"/><span class="phase-tag">B</span></div></div>
+<div class="frame-body">
+<div class="frame-head"><span class="frame-num">КАДР 12</span><span class="frame-sub">A · B</span></div>
+<p class="frame-action">A: общий CCTV — Ага и Дарек уходят к бусику, миссия выполнена; пара остаётся в машине. Войцек в благодарность мигает фарами и сигналит. Дарек замечает и оборачивается с улыбкой. B: поверх того же общего появляется финальная брендовая графика.</p>
+<div class="frame-lines"><div class="line"><span class="line-who">ON SCREEN</span><span class="line-pl">FOOD WITHOUT PEPSI? THAT’S CRIMINAL. + BETTER WITH PEPSI</span><span class="line-ru">«Еда без Pepsi? Это преступление. + С Pepsi лучше.»</span></div></div>
+<div class="frame-data">
+<div class="dfield"><span class="dlabel">Композиция</span><span class="dval">A — широкий CCTV с машиной и бусиком. B — та же база, поверх которой работает крупная брендовая графика.</span></div>
+<div class="dfield"><span class="dlabel">Камера</span><span class="dval">Статичная CCTV-камера; в B камера не меняется — движение создаёт только графика.</span></div>
+<div class="dfield"><span class="dlabel">Монтаж</span><span class="dval">Финальный общий → end card / graphic overlay.</span></div>
+<div class="dfield"><span class="dlabel">Переход</span><span class="dval">END.</span></div>
+<div class="dfield"><span class="dlabel">Аудио</span><span class="dval">Шаги, парковочный ambience, музыкальная финальная точка. Без лишнего пафоса.</span></div>
+</div>
+</div>
+</article>
+<div aria-label="Аниматик — собранный итог раскадровки" class="video-block animatic-block"><div class="animatic-head"><span class="animatic-title">АНИМАТИК</span><span class="animatic-meta">30 сек · 16:9 · 24 fps</span></div>
+<div class="video-frame">
+<video controls="" loop="" playsinline="" poster="assets/images/image_15.jpg" preload="none">
+<source src="assets/video/video_02.mp4" type="video/mp4"/>
+</video>
+</div>
+</div>
+</div>
+</section>
+<section id="references">
+<div class="wrap">
+<div class="sec-head"><span class="sec-num mono">04</span><h2 class="sec-title">Референсы по визуалу</h2></div>
+<div class="body-text" style="max-width:48rem; margin-bottom:1rem;">
+<p>Мы немного «психанули» и решили не останавливаться на мудбордах и описании стилистики. Вместо того чтобы только показать направление, мы попробовали сразу увидеть будущий ролик таким, каким он может стать.</p>
+<p>Поэтому сделали практически готовый кастинг, нашли характер каждого героя, проработали костюмы и детали образов, реквизит, автомобиль, Pepsi Patrol van и саму локацию. Для AI-производства это особенно важно: перед началом генерации у нас уже есть не просто набор референсов, а целостный визуальный мир с зафиксированными героями, пространством и правилами.</p>
+</div>
+<div class="cast-card light">
+<div class="cast-media">
+<video aria-label="Дарек — живой портрет" autoplay="" loop="" muted="" playsinline="" poster="assets/images/image_16.jpg" preload="auto"><source src="assets/video/video_03.mp4" type="video/mp4"/></video>
+</div>
+<div>
+<p class="cast-name">Дарек</p>
+<p>Дареку около 40–45. Большой, немного нескладный, с небольшим животом. Он любит пиццу, но Pepsi любит ещё больше. В душе Дарек почти агент 007 — и к работе в Pepsi Patrol относится соответственно серьёзно.</p>
+<p>Он исполнительный и преданный делу. Если Ага сказала отнести Pepsi на другую сторону машины — он пойдёт и отнесёт. Протокол есть протокол. А больше всего в этой работе Дарек любит то, что может пить ОЧЕНЬ МНОГО Pepsi.</p>
+</div>
+</div><div class="character-board" role="figure"><img alt="Дарек — карта персонажа" loading="lazy" src="assets/images/image_17.jpg"/></div>
+<div class="cast-card light">
+<div class="cast-media">
+<video aria-label="Ага — живой портрет" autoplay="" loop="" muted="" playsinline="" poster="assets/images/image_18.jpg" preload="auto"><source src="assets/video/video_04.mp4" type="video/mp4"/></video>
+</div>
+<div>
+<p class="cast-name">Ага</p>
+<p>Ага миниатюрная, но недооценивать её точно не стоит. Один её взгляд режет как бритва. Она — мозг Pepsi Patrol: быстрая, собранная, крайне профессиональная и готовая к любой ситуации.</p>
+<p>Ага первой замечает нарушение, принимает решение и раздаёт указания. Она абсолютно серьёзна и никогда не пытается быть смешной — и именно поэтому смешная. В паре с большим и несколько неуклюжим Дареком это работает особенно хорошо: он почти на голову выше неё, но ни у кого не возникает сомнений, кто здесь командир.</p>
+</div>
+</div><div class="character-board" role="figure"><img alt="Ага — карта персонажа" loading="lazy" src="assets/images/image_19.jpg"/></div>
+<div class="cast-card light duo-card">
+<div class="cast-media">
+<img alt="Pepsi Patrol — дуэт" src="assets/images/image_20.jpg"/>
+</div>
+<div>
+<p class="cast-name">Pepsi Patrol — дуэт</p>
+<p>Ага и Дарек работают именно как комедийная пара. Она — быстрая, собранная и командует. Он — невозмутимый, обстоятельный и послушно следует за ней. Вместе они выглядят так, будто занимаются этим всю жизнь. Разница в росте усиливает комедию: Дарек почти на голову выше Аги, но командир здесь совершенно очевидно она.</p>
+</div>
+</div>
+<div class="light-wide duo-motion-copy">
+<p>Ещё отчётливее комедия пары раскрывается в движении. Маленькая, стремительная Ага всегда на полшага впереди, а большой, чуть неуклюжий Дарек следует за ней и постоянно самую малость запаздывает. Этот микроскопический рассинхрон, разница в росте и пластике создают ощущение настоящего комедийного дуэта — при том, что оба относятся к своей работе абсолютно серьёзно.</p>
+</div>
+<div class="video-bleed duo-video">
+<video aria-label="Pepsi Patrol — дуэт, зацикленное видео" autoplay="" loop="" muted="" playsinline="" poster="assets/images/image_21.jpg" preload="auto"><source src="assets/video/video_05.mp4" type="video/mp4"/></video>
+<div class="video-label"><span><span class="rec-dot"></span>PEPSI PATROL — ДУЭТ</span><span>AUTO LOOP</span></div>
+</div>
+<div class="cast-card light">
+<div class="cast-media"><img alt="Войцек" src="assets/images/image_22.jpg"/></div>
+<div>
+<p class="cast-name">Войцек</p>
+<p>Войцеку около 25. Кудрявый, шебутной, немного наивный и очень живой. В нём одновременно есть своенравность и удивительная готовность подчиниться человеку, который говорит достаточно уверенно.</p>
+<p>Сначала он не понимает, что происходит, потом честно выполняет инструкции Аги — и внезапно обнаруживает, что система действительно работает. Большой глоток. Большие глаза. WOW.</p>
+</div>
+</div>
+<div class="cast-card light">
+<div class="cast-media"><img alt="Ева" src="assets/images/image_23.jpg"/></div>
+<div>
+<p class="cast-name">Ева</p>
+<p>Еве около 25. Наблюдательная, ироничная и чуть более искушённая, чем Войцек. Пока он пытается понять правила происходящего, она уже успевает их разгадать.</p>
+<p>Сначала Ева смотрит на Pepsi Patrol с недоверием. Потом видит реакцию Войцека — и всё понимает. К моменту, когда Дарек приносит банку ей, она принимает её почти по-королевски: конечно, Pepsi предназначалась и ей. А как иначе?</p>
+</div>
+</div>
+<div style="padding-top:3rem; border-top:1px solid var(--line);">
+<p class="cast-name">Локация</p>
+<p>Обычная польская парковка у фастфуда вечером: мокрый асфальт, холодный свет фонарей, несколько машин и Pepsi Patrol van неподалёку. Никакой рекламной красоты — пространство должно выглядеть максимально буднично и документально, чтобы появление патруля казалось одновременно правдоподобным и совершенно абсурдным.</p>
+<div class="loc-imgs">
+<img alt="Локация — парковка 1" src="assets/images/image_24.jpg"/>
+<img alt="Локация — парковка 2" src="assets/images/image_25.jpg"/>
+</div>
+</div>
+</div>
+</section>
+<section class="product-section" id="product"><div class="wrap-wide"><div class="sec-head"><span class="sec-num mono">—</span><h2 class="sec-title">РЕКВИЗИТ / ПРОДУКТ</h2></div><div class="product-grid"><div><p><strong>Pepsi — часть действия.</strong></p><p>Банка работает не как декоративный packshot, а как предмет внутри сцены: награда, которую Pepsi Patrol доставляет героям.</p></div><div class="can-wrap"><img alt="Банка Pepsi Max" loading="eager" src="assets/images/image_26.jpg"/></div></div></div></section><section class="music-section" id="music"><div class="wrap"><div class="sec-head"><span class="sec-num mono">—</span><h2 class="sec-title">МУЗЫКА</h2></div><div class="music-copy"><p>Используем музыку из оригинальных британских версий кампании — как ещё одну связь с миром SodaStop.</p><p>Музыка не сопровождает весь ролик. Она появляется только в финальной части — коротким фрагментом, который подхватывает развязку и завершает историю. До этого остаёмся внутри почти документальной реальности: голоса, шаги, окружающий шум, паузы. Поэтому появление музыки в конце ощущается как точный брендовый жест и даёт финалу нужный подъём.</p><audio id="treatment-music" preload="metadata"><source src="assets/audio/music_01.mp3" type="audio/mpeg"/></audio><button aria-pressed="false" class="listen-button" id="music-toggle" type="button">СЛУШАТЬ</button></div></div></section><section id="techspec">
+<div class="wrap">
+<div class="sec-head"><span class="sec-num mono">05</span><h2 class="sec-title">Технический паспорт</h2></div>
+<p class="lede" style="margin-bottom:2rem;">Видение, переведённое в задачи для производства.</p>
+<div class="spec-grid">
+<div class="spec-field"><span class="spec-label">Хронометраж</span><span class="spec-val">30 секунд</span></div>
+<div class="spec-field"><span class="spec-label">Формат</span><span class="spec-val">16:9 · 1920 × 1080 · Full HD · 24 fps</span></div>
+<div class="spec-field"><span class="spec-label">Структура</span><span class="spec-val">12 основных кадров / шотов</span></div>
+<div class="spec-field"><span class="spec-label">Монтаж</span><span class="spec-val">Спокойное начало → ускорение 5–7 → снова размеренный финал.</span></div>
+<div class="spec-field"><span class="spec-label">Continuity</span><span class="spec-val">Левый руль; Войцек — водитель, Ева — пассажир; география и направления движения согласованы.</span></div>
+<div class="spec-field"><span class="spec-label">Звук</span><span class="spec-val">Естественная среда, точечные синхронные SFX. Музыка — только в финальной части.</span></div>
+<div class="spec-field"><span class="spec-label">Визуальный подход</span><span class="spec-val">Фотореалистичная AI-генерация с приоритетом документальной достоверности. Без glossy advertising look.</span></div>
+<div class="spec-field"><span class="spec-label">Цвет</span><span class="spec-val">Нейтральная слегка холодная вечерняя палитра; Pepsi blue / red — контролируемые акценты.</span></div>
+<div class="spec-field"><span class="spec-label">Камера</span><span class="spec-val">CCTV + обычная кинематографическая камера. Кадр 7: A→B и постепенный Dutch angle.</span></div>
+<div class="spec-field"><span class="spec-label">AI-production</span><span class="spec-val">Персонажи, локация и ключевые кадры фиксируются до генерации движения; storyboard / IN–OUT пары — база каждого шота.</span></div>
+</div>
+</div>
+</section>
+</main>
+<div class="closer">
+<span aria-hidden="true" class="rec-dot" style="display:block; width:9px; height:9px;"></span>
+<h2>ВСЁ. ВЫЕЗЖАЕМ</h2>
+<p>Ужин без Pepsi сам себя не задержит</p>
+</div>
+<footer>PEPSI PATROL · «THAT'S CRIMINAL» · EATING OUT — SODASTOP / POLAND · Режиссёрский тритмент · 2026</footer>
+<script>
+(function(){
+  const typer=document.getElementById('key-message-type');
+  if(typer){
+    const full=typer.dataset.text||typer.textContent.trim();
+    const reduced=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!reduced){
+      let i=0, deleting=false;
+      typer.textContent='';
+      const tick=()=>{
+        if(!deleting){
+          i++; typer.textContent=full.slice(0,i);
+          if(i>=full.length){ deleting=true; setTimeout(tick,1900); return; }
+          setTimeout(tick,42);
+        } else {
+          i--; typer.textContent=full.slice(0,i);
+          if(i<=0){ deleting=false; setTimeout(tick,650); return; }
+          setTimeout(tick,20);
+        }
+      };
+      setTimeout(tick,450);
+    }
+  }
+  const audio=document.getElementById('treatment-music');
+  const btn=document.getElementById('music-toggle');
+  if(audio&&btn){
+    btn.addEventListener('click',async()=>{
+      if(audio.paused){
+        try{await audio.play();btn.textContent='ПАУЗА';btn.setAttribute('aria-pressed','true');}catch(e){}
+      }else{
+        audio.pause();btn.textContent='СЛУШАТЬ';btn.setAttribute('aria-pressed','false');
+      }
+    });
+    audio.addEventListener('ended',()=>{btn.textContent='СЛУШАТЬ';btn.setAttribute('aria-pressed','false');});
+  }
+  // Strengthen autoplay on browsers that allow muted inline video.
+  document.querySelectorAll('video[autoplay]').forEach(v=>{v.muted=true;const p=v.play();if(p&&p.catch)p.catch(()=>{});});
+})();
+</script></body>
+</html>
